@@ -1,0 +1,54 @@
+{% assign threshold = section.settings.free-shipping-threshold | times: 100 %}
+{% assign remaining_amount = threshold | minus: cart.total_price %}
+{% assign remaining_amount_money = remaining_amount | money %}
+
+
+<div class='shipping-bar'>
+    {% if remaining_amount >= 0 %}
+        <p>{{ section.settings.approaching-message | replace: '*', remaining_amount_money }}</p>
+    {% else %}
+        <p>{{ section.settings.free-shipping-message }}</p>
+    {% endif %}
+</div>
+
+
+
+{% schema %}
+{
+    "name": "Free Shipping Bar",
+    "settings": [
+        {
+            "type": "text",
+            "id": "free-shipping-threshold",
+            "label": "Free Shipping Threshold",
+            "info": "Include number only. Dont include $"
+        },
+        {
+            "type": "text",
+            "id": "free-shipping-message",
+            "label": "Free Shipping Message",
+            "info": "Your free shipping message"
+        },
+        {
+            "type": "text",
+            "id": "approaching-message",
+            "label": "Approaching Free Shipping Message",
+            "info": "Put a * where you want the remaining amount before free shipping"
+        }
+    ],
+    "class": "free-shipping-bar"
+}
+{% endschema %}
+
+{% stylesheet %}
+.shipping-bar {
+    text-align: center;
+    padding: 0.5em 2em;
+    background-color: orange;
+    font-weight: 600;
+}
+{% endstylesheet %}
+
+{% javascript %}
+    
+{% endjavascript %}
