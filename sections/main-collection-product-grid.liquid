@@ -1,12 +1,17 @@
 <div>
-  <div class="collection">
-    <h1 class="collection-title">{{ collection.title }}</h1>
     <div class="collection-list">
-      <!-- {% for product in collections.products %}
-        {% render product-card%}
-      {% endfor %} -->
+      {% for product in collection.products %}
+        {% render 'product-card',
+        product_card_product: product,
+        media_size: section.settings.image_ratio,
+        show_secondary_image: section.settings.show_secondary_image,
+        add_image_padding: section.settings.add_image_padding,
+        show_vendor: section.settings.show_vendor,
+        show_image_outline: section.settings.show_image_outline,
+        show_rating: section.settings.show_rating
+        %}
+      {% endfor %}
     </div>
-  </div>
 </div>
 
 {% schema %}
