@@ -1,0 +1,51 @@
+<form class="add-to-cart-form">
+    <select name="id" id="productSelect">
+        {% for variant in product.variants %}
+            {% if variant.available %}
+                <option value="{{ variant.id }}">
+                    {{ variant.title }} - {{ variant.price | money_with_currency}}
+                </option>
+            {% else %}
+                <option disabled>
+                    {{ variant.title }} -- sold out
+                </option>
+            {% endif %}
+        {% endfor %}
+        <select>
+            {{ current_variant.price | money }}
+            <label for="Quantity">quantity</label>
+            <input type="number" id="Quantity" name="quantity" value="1" min="1">
+            <button type="submit" name="add" id="AddToCart">Add to Cart</button>
+            ${test}
+        </select>
+    </select>
+</form>
+
+<script>
+    if (document.querySelector('#add-to-cart-form')) {
+        Vue.config.devtools = true
+        const productForm = {
+            // compilerOptions: {
+            //     delimiters: ['${', '}'],
+            //     comments: true
+            // },
+            delimiters: ['${','}'],
+            data() {
+                return {
+                    test: 'test1'
+                }
+            }
+        }
+
+        const app = Vue.createApp(productForm).mount('#add-to-cart-form')
+        // app.config.compilerOptions.delimiters = ['${', '}']
+        // const productForm = Vue.createApp({
+        //     delimiters: ['${','}'],
+        //     data() {
+        //         return {
+        //             test: 'test'
+        //         }
+        //     }
+        // }).mount('#add-to-cart-form')
+    }
+</script>
