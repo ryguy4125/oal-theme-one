@@ -17,67 +17,38 @@
             <input type="number" id="Quantity" name="quantity" value="1" min="1">
             <button type="submit" name="add" id="AddToCart">Add to Cart</button>
             <p>${ name }</p>
+            <p>${ message }</p>
         </select>
     </select>
 </form>
 
-</div>
-
 <script>
-    // if (document.querySelector('#add-to-cart-form')) {
-        // Vue.config.devtools = true
+    if (document.querySelector('#add-to-cart-form')) {
 
-        var data = {
-            message: 'Hello Vue.js!',
-            name: 'Ryan'
-        }
+        /* Vue instance */
+        const { createApp } = Vue;
 
-        var demo = new Vue({
-            el: '#add-to-cart-form',
-            delimiters: ['${', '}'],
-            data: data
-        });
+        const App = {
+            delimiters: ['${','}'],
+            data() {
+                return {
+                name: "Ryan",
+                message: "Test Message"
+                }
+            }
+        };
 
+        const vm = createApp(App).mount("#add-to-cart-form");
 
-        // const { createApp } = Vue;
+        /* Alternative Instance of Vue App */
 
-        // const App = {
-        //     el: '#demo',
-        //     delimiters: ['${','}'],
-        //     data() {
-        //         return {
-        //         name: "Ryan",
-        //         message: "Test Message"
-        //         }
-        //     }
-        // };
-
-        // createApp(App);
-
-
-        // const { createApp } = Vue;
-
-        // const App = {
-        //     delimiters: ['${','}'],
-        //     data() {
-        //         return {
-        //         name: "Ryan",
-        //         message: "Test Message"
-        //         }
-        //     }
-        // };
-
-        // createApp(App).mount("#demo");
-
-        // const app = Vue.createApp(productForm).mount('#demo')
-        // app.config.compilerOptions.delimiters = ['${', '}']
         // const productForm = Vue.createApp({
         //     delimiters: ['${','}'],
         //     data() {
         //         return {
-        //             message: 'test'
+        //             name: 'test'
         //         }
         //     }
-        // }).mount('#demo')
-    // }
+        // }).mount('#add-to-cart-form')
+    }
 </script>
