@@ -1,4 +1,4 @@
-<form class="add-to-cart-form">
+<form id="add-to-cart-form">
     <select name="id" id="productSelect">
         {% for variant in product.variants %}
             {% if variant.available %}
@@ -16,36 +16,68 @@
             <label for="Quantity">quantity</label>
             <input type="number" id="Quantity" name="quantity" value="1" min="1">
             <button type="submit" name="add" id="AddToCart">Add to Cart</button>
-            ${test}
+            <p>${ name }</p>
         </select>
     </select>
 </form>
 
+</div>
+
 <script>
-    if (document.querySelector('#add-to-cart-form')) {
-        Vue.config.devtools = true
-        const productForm = {
-            // compilerOptions: {
-            //     delimiters: ['${', '}'],
-            //     comments: true
-            // },
-            delimiters: ['${','}'],
-            data() {
-                return {
-                    test: 'test1'
-                }
-            }
+    // if (document.querySelector('#add-to-cart-form')) {
+        // Vue.config.devtools = true
+
+        var data = {
+            message: 'Hello Vue.js!',
+            name: 'Ryan'
         }
 
-        const app = Vue.createApp(productForm).mount('#add-to-cart-form')
+        var demo = new Vue({
+            el: '#add-to-cart-form',
+            delimiters: ['${', '}'],
+            data: data
+        });
+
+
+        // const { createApp } = Vue;
+
+        // const App = {
+        //     el: '#demo',
+        //     delimiters: ['${','}'],
+        //     data() {
+        //         return {
+        //         name: "Ryan",
+        //         message: "Test Message"
+        //         }
+        //     }
+        // };
+
+        // createApp(App);
+
+
+        // const { createApp } = Vue;
+
+        // const App = {
+        //     delimiters: ['${','}'],
+        //     data() {
+        //         return {
+        //         name: "Ryan",
+        //         message: "Test Message"
+        //         }
+        //     }
+        // };
+
+        // createApp(App).mount("#demo");
+
+        // const app = Vue.createApp(productForm).mount('#demo')
         // app.config.compilerOptions.delimiters = ['${', '}']
         // const productForm = Vue.createApp({
         //     delimiters: ['${','}'],
         //     data() {
         //         return {
-        //             test: 'test'
+        //             message: 'test'
         //         }
         //     }
-        // }).mount('#add-to-cart-form')
-    }
+        // }).mount('#demo')
+    // }
 </script>

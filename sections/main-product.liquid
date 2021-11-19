@@ -406,8 +406,6 @@
       </div>
     </modal-dialog>
   {%- endfor -%}
-
-  {% render 'add-to-cart-form' %}
 </section>
 
 {% javascript %}
@@ -448,7 +446,6 @@
 {% endjavascript %}
 
 <script>
-  Vue.config.devtools = true
   document.addEventListener('DOMContentLoaded', function() {
     function isIE() {
       const ua = window.navigator.userAgent;
