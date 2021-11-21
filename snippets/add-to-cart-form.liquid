@@ -15,7 +15,7 @@
             {{ current_variant.price | money }}
             <label for="Quantity">quantity</label>
             <input type="number" id="Quantity" name="quantity" value="1" min="1">
-            <button type="submit" name="add" id="AddToCart">Add to Cart</button>
+            <button @click="addToCart" type="submit" name="add" id="AddToCart">Add to Cart</button>
             <p>${ name }</p>
             <p>${ message }</p>
         </select>
@@ -34,6 +34,21 @@
                 return {
                 name: "Ryan",
                 message: "Test Message"
+                }
+            },
+            created() {
+                axios.get("/products/{{ product.handle }}.js")
+                    .then(results => {
+                        console.log(results)
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+            },
+            methods:{
+                addToCart(event){
+                    event.preventDefault();
+                    console.log(this.name)
                 }
             }
         };
