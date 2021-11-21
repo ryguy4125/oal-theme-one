@@ -5,17 +5,25 @@
 
 <section class="page-width">
   <div class="product grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% endif %}">
-    <h2>Test</h2>
-    <div class="grid__item"> <!-- product__media-wrapper"> -->
+    {%- if product.selected_or_first_available_variant.featured_media != null -%}
+      {%- assign media = product.featured_media -%}
+      <img src="{{ media | img_url: '300x' }}"
+        loading="lazy"
+      > 
+    {% else %}
+     {% render 'icon-unavailable' %}
+
+    {% endif %}
+    <!-- <div class="grid__item product__media-wrapper"> -->
         <!-- {%- assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' -%} -->
         <!-- {%- if product.selected_or_first_available_variant.featured_media != null -%} -->
           <!-- {%- assign media = product.featured_media -%} -->
-          <h2>passed conditional</h2>
+    
           <!-- <img src="{{ media | img_url: '1500x' }}"> -->
           
         <!-- {%- endif -%} -->
       
-    </div>
+    <!-- </div> -->
     <div class="product__info-wrapper grid__item">
       <div id="ProductInfo-{{ section.id }}" class="product__info-container{% if section.settings.enable_sticky_info %} product__info-container--sticky{% endif %}">
         {%- assign product_form_id = 'product-form-' | append: section.id -%}

@@ -1,5 +1,7 @@
 <div class="hero-image section">
-    <img src="{{section.settings.image | img_url: "master"}}">
+    <img src="{{ section.settings.image | img_url: "master" }}"
+        loading="lazy"
+    >
 </div>
 
 {% schema %}
