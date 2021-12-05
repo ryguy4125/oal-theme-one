@@ -48,23 +48,18 @@
                         console.log(error)
                     })
             },
-            // mounted() {
-            //     this.variant = 
-            // }
             methods:{
                 addToCart(event){
                     event.preventDefault()
                     console.log(this.variant)
 
                     let quantity_form = document.getElementById('Quantity').value;
-                    let variant_id = "{{ variant.id }}";
 
                     let data = {
                         id: this.variant,
-                        quantity: 1
+                        quantity: quantity_form
                     }
 
-                    // axios.post("/cart/add.js", {'items':[{'id': variant_id, 'quantity': 1}]})
                     axios.post("/cart/add.js", data)
                         .then(response => {
                             console.log(response)
