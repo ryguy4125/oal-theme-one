@@ -1,5 +1,5 @@
 <form id="add-to-cart-form">
-    <select name="id" id="productSelect">
+    <select name="id" id="productSelect" @change="selectVariant($event)">
         {% for variant in product.variants %}
             {% if variant.available %}
                 <option value="{{ variant.id }}">
@@ -17,7 +17,7 @@
             <input type="number" id="Quantity" name="quantity" value="1" min="1">
             <button @click="addToCart" type="submit" name="add" id="AddToCart">Add to Cart</button>
             <p>${ name }</p>
-            <p>${ message }</p>
+            <p>${ variant }</p>
         </select>
     </select>
 </form>
@@ -32,23 +32,52 @@
             delimiters: ['${','}'],
             data() {
                 return {
-                name: "Ryan",
-                message: "Test Message"
+                quantity: "",
+                variant: "",
+                name: "Test"
                 }
             },
             created() {
                 axios.get("/products/{{ product.handle }}.js")
                     .then(results => {
                         console.log(results)
+                        this.variant = results.data.variants[0].id
+                        console.log(this.variant)
                     })
                     .catch(error => {
                         console.log(error)
                     })
             },
+            // mounted() {
+            //     this.variant = 
+            // }
             methods:{
                 addToCart(event){
-                    event.preventDefault();
-                    console.log(this.name)
+                    event.preventDefault()
+                    console.log(this.variant)
+
+                    let quantity_form = document.getElementById('Quantity').value;
+                    let variant_id = "{{ variant.id }}";
+
+                    let data = {
+                        id: this.variant,
+                        quantity: 1
+                    }
+
+                    // axios.post("/cart/add.js", {'items':[{'id': variant_id, 'quantity': 1}]})
+                    axios.post("/cart/add.js", data)
+                        .then(response => {
+                            console.log(response)
+                        })
+                        .catch(error => {
+                            console.log(error)
+                        })
+                },
+                selectVariant(event){
+                    let selector = document.getElementById('productSelect');
+                    let selected_variant = event.target.value;
+
+                    console.log(selected_variant)
                 }
             }
         };
